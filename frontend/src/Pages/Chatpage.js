@@ -1,14 +1,20 @@
 import { Box } from "@chakra-ui/layout";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Chatbox from "../components/Chatbox";
 import MyChats from "../components/MyChats";
 import SideDrawer from "../components/miscellaneous/SideDrawer";
 import { ChatState } from "../Context/ChatProvider";
+import { useHistory } from "react-router-dom";
 
 const Chatpage = () => {
   const [fetchAgain, setFetchAgain] = useState(false);
-  const { user } = ChatState();
-
+  const { user , setUser } = ChatState();
+  const history = useHistory();
+  useEffect(() => {
+    const data = history.location.state?.data;
+    setUser(data)
+    console.log(data)
+  }, [])
   return (
     <div style={{ width: "100%" }}>
       {user && <SideDrawer />}

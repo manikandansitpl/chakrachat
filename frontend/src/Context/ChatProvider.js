@@ -11,13 +11,20 @@ const ChatProvider = ({ children }) => {
 
   const history = useHistory();
 
-  useEffect(() => {
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-    setUser(userInfo);
+    const storedFunction = async()=>{
+      const info = localStorage.getItem("userInfo")
+    const userInfo = await  JSON.parse(info);
+    await setUser(userInfo);
 
     if (!userInfo) history.push("/");
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }
+
+  console.log(history)
+  useEffect(() => {
+    storedFunction()
   }, [history]);
+
 
   return (
     <ChatContext.Provider

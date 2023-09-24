@@ -6,6 +6,7 @@ import { useToast } from "@chakra-ui/toast";
 import axios from "axios";
 import { useState } from "react";
 import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [show, setShow] = useState(false);
@@ -57,6 +58,7 @@ const Signup = () => {
           email,
           password,
           pic,
+          isOnline:true
         },
         config
       );
@@ -70,7 +72,7 @@ const Signup = () => {
       });
       localStorage.setItem("userInfo", JSON.stringify(data));
       setPicLoading(false);
-      history.push("/chats");
+      history.push("/chats",{data :data});
     } catch (error) {
       toast({
         title: "Error Occured!",
@@ -100,9 +102,9 @@ const Signup = () => {
     if (pics.type === "image/jpeg" || pics.type === "image/png") {
       const data = new FormData();
       data.append("file", pics);
-      data.append("upload_preset", "chat-app");
-      data.append("cloud_name", "piyushproj");
-      fetch("https://api.cloudinary.com/v1_1/piyushproj/image/upload", {
+      data.append("upload_preset", "n1xe3osg");
+      data.append("cloud_name", "dfoncdbir");
+      fetch("https://api.cloudinary.com/v1_1/dfoncdbir/image/upload", {
         method: "post",
         body: data,
       })

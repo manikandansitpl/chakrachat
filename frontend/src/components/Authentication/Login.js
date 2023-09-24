@@ -42,7 +42,7 @@ const Login = () => {
 
       const { data } = await axios.post(
         "/api/user/login",
-        { email, password },
+        { email, password},
         config
       );
 
@@ -56,7 +56,7 @@ const Login = () => {
       setUser(data);
       localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
-      history.push("/chats");
+      history.push("/chats",{data:data});
     } catch (error) {
       toast({
         title: "Error Occured!",

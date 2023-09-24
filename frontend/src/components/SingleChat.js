@@ -11,6 +11,7 @@ import ProfileModal from "./miscellaneous/ProfileModal";
 import ScrollableChat from "./ScrollableChat";
 import Lottie from "react-lottie";
 import animationData from "../animations/typing.json";
+import { Button, ButtonGroup } from '@chakra-ui/react'
 
 import io from "socket.io-client";
 import UpdateGroupChatModal from "./miscellaneous/UpdateGroupChatModal";
@@ -69,6 +70,11 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       });
     }
   };
+
+ const sendMessage1=()=>{
+  const msg={key:"Enter"};
+  sendMessage(msg);
+ }
 
   const sendMessage = async (event) => {
     if (event.key === "Enter" && newMessage) {
@@ -139,7 +145,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
   const typingHandler = (e) => {
     setNewMessage(e.target.value);
-
+    
     if (!socketConnected) return;
 
     if (!typing) {
@@ -239,13 +245,22 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               ) : (
                 <></>
               )}
+              <Box 
+               display={"flex"}
+               justifyContent={"space-between"}
+               alignItem={"center"}>
               <Input
                 variant="filled"
                 bg="#E0E0E0"
                 placeholder="Enter a message.."
                 value={newMessage}
                 onChange={typingHandler}
+                width={"90%"}
               />
+              <Button type="submit" onClick={sendMessage1} colorScheme='teal' size='md'>
+                Button
+              </Button>
+              </Box>
             </FormControl>
           </Box>
         </>
